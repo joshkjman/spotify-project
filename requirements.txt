@@ -1,0 +1,8 @@
+pandas
+requests
+matplotlib
+scikit-learn
+flask
+flask-login
+flask-sqlalchemy
+flask-session

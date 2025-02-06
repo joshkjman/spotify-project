@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %}Playlists{% endblock %}
+
+{% block content %}
+<br>
+<h1>Playlist Sorter</h1>
+<br>
+<form method="POST">
+    <h3>How many playlists do you want to split your playlist into?</h3>
+    <br>
+    <div class="playlist_sorter">
+        <input list="number" name="playlist_sorter">
+        <datalist id="number">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+        </datalist>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Sort</button>
+</form>
+<br>
+<img src='data:image/png;base64,{{data}}'/>
+{% endblock %}
