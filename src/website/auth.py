@@ -155,7 +155,6 @@ def get_playlists():
     if request.method == 'POST':
         n_clusters = request.form.get('playlist_sorter')
         print(n_clusters)
-        # n_clusters = 7
         # kmeans = KMeans(n_clusters=n_clusters)
         # kmeans.fit(x_df)
         # songs_with_label = songs.join(x_df)
