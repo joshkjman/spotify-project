@@ -3,6 +3,8 @@
 {% block content %}
 <br>
 <h1>Playlist Sorter</h1>
+<img src='data:image/png;base64,{{data}}'/>
+<br>
 <br>
 <form method="POST">
     <h3>How many playlists do you want to split your playlist into?</h3>
@@ -29,6 +31,4 @@
     <br>
     <button type="submit" class="btn btn-primary">Sort</button>
 </form>
-<br>
-<img src='data:image/png;base64,{{data}}'/>
 {% endblock %}

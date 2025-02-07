@@ -12,8 +12,7 @@ class KMeans:
     def fit(self, X_df):
         clusters = []
         for _ in range(self.n_clusters):
-            np.random.seed(10)
-            clusters.append({'x_cluster':np.random.choice(X_df['x']), 'y_cluster': np.random.choice(X_df['y'])})
+            clusters.append({'x_cluster': random.choice(X_df['x']), 'y_cluster': random.choice(X_df['y'])})
         self.clusters_df = pd.DataFrame(clusters)
 
 

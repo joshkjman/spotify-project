@@ -131,7 +131,7 @@ def callback():
         return redirect(url_for('views.home'))
     
 
-@auth.route('/playlists', methods=['GET', 'POST'])
+@auth.route('/playlist_sorter', methods=['GET', 'POST'])
 def get_playlists():
     if 'access_token' not in session:
         return redirect('/login')
@@ -149,12 +149,9 @@ def get_playlists():
     x_df = fit_PCA(songs)
     data_plot = show_elbow_plot(x_df, KMeans)
     
-    # user_id = get_user_id(token)
-    # response = create_playlist(token, user_id)
 
     if request.method == 'POST':
         n_clusters = request.form.get('playlist_sorter')
-        print(n_clusters)
         # kmeans = KMeans(n_clusters=n_clusters)
         # kmeans.fit(x_df)
         # songs_with_label = songs.join(x_df)
@@ -196,4 +193,4 @@ def refresh_token():
     session['access_token'] = new_token_info['access_token']
     session['expires_at'] = datetime.now().timestamp() + new_token_info['expires_in']
 
-    return redirect('/playlists')
+    return redirect('/playlist_sorter')
