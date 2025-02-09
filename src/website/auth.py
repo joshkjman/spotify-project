@@ -9,7 +9,7 @@ import requests
 from datetime import datetime
 from playlist_sorter.get_playlist import playlist_songs
 from playlist_sorter.merge_csvs import get_kaggle_data, join_data
-from playlist_sorter.sorter import scale_songs, fit_PCA, show_elbow_plot, show_cluster
+from playlist_sorter.sorter import scale_songs, fit_PCA, show_plots
 from playlist_sorter.create_playlists import get_user_id, create_playlist_return_id, add_songs_playlist
 from playlist_sorter.KMeans import KMeans
 from dotenv import load_dotenv
@@ -147,28 +147,27 @@ def get_playlists():
     tracks_all_analysis = join_data(kaggle_data, all_tracks)
     songs = scale_songs(tracks_all_analysis)
     x_df = fit_PCA(songs)
-    data_plot = show_elbow_plot(x_df, KMeans)
+    data_plot = show_plots(x_df, KMeans)
     
 
     if request.method == 'POST':
         n_clusters = request.form.get('playlist_sorter')
-        kmeans = KMeans(n_clusters=n_clusters)
-        kmeans.fit(x_df)
-        songs_with_label = songs.join(x_df)
+        # kmeans = KMeans(n_clusters=n_clusters)
+        # kmeans.fit(x_df)
+        # songs_with_label = songs.join(x_df)
 
-        user_id = get_user_id(token)
+        # user_id = get_user_id(token)
         
-        for cluster in range(n_clusters):
-            songs_by_label = songs_with_label[songs_with_label['label'] == cluster]
+        # for cluster in range(n_clusters):
+        #     songs_by_label = songs_with_label[songs_with_label['label'] == cluster]
 
-            song_uris = []
-            for _, row in songs_by_label.iterrows():
-                song_uri = row['uri']
-                song_uris.append(song_uri)
+        #     song_uris = []
+        #     for _, row in songs_by_label.iterrows():
+        #         song_uri = row['uri']
+        #         song_uris.append(song_uri)
 
-            print(song_uris)
-            playlist_id = create_playlist_return_id(token, user_id, cluster)
-            add_songs_playlist(token, playlist_id, song_uris)
+        #     playlist_id = create_playlist_return_id(token, user_id, cluster)
+        #     add_songs_playlist(token, playlist_id, song_uris)
 
 
     return render_template("playlists.html", user=current_user, data=data_plot)

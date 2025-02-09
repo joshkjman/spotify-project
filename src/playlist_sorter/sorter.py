@@ -33,7 +33,7 @@ def fit_PCA(songs):
     return x_df
 
 
-def show_elbow_plot(x_df, KMeans):        
+def show_plots(x_df, KMeans):        
     means = []
     inertias = []
 
@@ -43,13 +43,19 @@ def show_elbow_plot(x_df, KMeans):
         means.append(n)
         inertias.append(kmeans.inertia(x_df))
 
-    fig = Figure()
-    ax = fig.subplots()
-    ax.plot(means, inertias)
-    ax.set_xlabel('Number of clusters/playlists')
-    ax.set_ylabel('Inertia')
-    ax.set_xticks(np.arange(0,20))
-    ax.grid()
+    fig, ax = plt.subplots(2, figsize=(12,12), facecolor="#d3d3d3")
+    ax[0].plot(means, inertias)
+    ax[0].set_xlabel('Number of clusters/playlists')
+    ax[0].set_ylabel('Inertia')
+    ax[0].set_xticks(np.arange(0,20))
+    ax[0].grid()
+    kmeans = KMeans(n_clusters=7)
+    kmeans.fit(x_df)
+    x_df.plot.scatter(x='x',y='y', c='label', colormap='viridis', ax=ax[1])
+    ax[0].set_facecolor("#d3d3d3")
+    ax[1].set_facecolor("#d3d3d3")
+    ax[1].grid()
+    plt.subplots_adjust(left=0.05, top=0.95)
     buf = BytesIO()
     fig.savefig(buf, format="png")
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
