@@ -92,7 +92,7 @@ def sign_up():
 
 @auth.route('/authorize')
 def authorize_and_token():
-    scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public'
+    scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public user-top-read'
 
     params = {
         'client_id': client_id,
@@ -152,22 +152,22 @@ def get_playlists():
 
     if request.method == 'POST':
         n_clusters = request.form.get('playlist_sorter')
-        # kmeans = KMeans(n_clusters=n_clusters)
-        # kmeans.fit(x_df)
-        # songs_with_label = songs.join(x_df)
+        kmeans = KMeans(n_clusters=n_clusters)
+        kmeans.fit(x_df)
+        songs_with_label = songs.join(x_df)
 
-        # user_id = get_user_id(token)
+        user_id = get_user_id(token)
         
-        # for cluster in range(n_clusters):
-        #     songs_by_label = songs_with_label[songs_with_label['label'] == cluster]
+        for cluster in range(n_clusters):
+            songs_by_label = songs_with_label[songs_with_label['label'] == cluster]
 
-        #     song_uris = []
-        #     for _, row in songs_by_label.iterrows():
-        #         song_uri = row['uri']
-        #         song_uris.append(song_uri)
+            song_uris = []
+            for _, row in songs_by_label.iterrows():
+                song_uri = row['uri']
+                song_uris.append(song_uri)
 
-        #     playlist_id = create_playlist_return_id(token, user_id, cluster)
-        #     add_songs_playlist(token, playlist_id, song_uris)
+            playlist_id = create_playlist_return_id(token, user_id, cluster)
+            add_songs_playlist(token, playlist_id, song_uris)
 
 
     return render_template("playlists.html", user=current_user, data=data_plot)

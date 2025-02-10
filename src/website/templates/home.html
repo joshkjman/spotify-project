@@ -2,5 +2,24 @@
 
 {% block content %}
 <br>
-<h1>This is the home page</h1>
+<h1>Spotify user data</h1>
+<br>
+{% for name, image, uri in artists %}
+<div>
+    <a href="{{ uri }}">
+        <img src="{{ image }}">
+    </a>
+    <a href="{{ uri }}">
+        <p>{{ name }}</p>
+    </a>
+</div>
+{% endfor %}
+<br>
+{% for name, uri in tracks %}
+<div>
+    <a href="{{ uri }}">
+        <p>{{ name}}</p>
+    </a>
+</div>
+{% endfor %}
 {% endblock %}
