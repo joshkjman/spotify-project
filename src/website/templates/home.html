@@ -1,25 +1,46 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% extends "base.html" %} 
+
+{% block title %}
+Home
+{% endblock %}
+
+
 
 {% block content %}
 <br>
 <h1>Spotify user data</h1>
 <br>
+
+<div class="box1">
+<h3>Artists you listen to most</h3>
+<br>
+<ol class="top5">
 {% for name, image, uri in artists %}
-<div>
     <a href="{{ uri }}">
         <img src="{{ image }}">
     </a>
     <a href="{{ uri }}">
-        <p>{{ name }}</p>
+        <li class="names">{{ name }}</li>
     </a>
+    <br>
+    <br>
+{% endfor %}            
+</ol>
 </div>
-{% endfor %}
+
+<div class="box2">
+<h3>Songs you listen to most</h3>
 <br>
+
+<ol class="top5">
 {% for name, uri in tracks %}
-<div>
     <a href="{{ uri }}">
-        <p>{{ name}}</p>
+        <li class="names" id="tracks">{{ name }}</li>
+        <br>
     </a>
+{% endfor %}    
+</ol>
 </div>
-{% endfor %}
+
+
 {% endblock %}
