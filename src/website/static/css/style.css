@@ -30,7 +30,7 @@
     height: 250px;
 }
 
-h1,h3{
+h1,h3,h2{
     font-family: 'Clash Display', sans-serif;
     color: #01a7aa;
 }
@@ -69,6 +69,7 @@ li{
     gap: 12px;
     border-radius: 8px;
     cursor: pointer;
+    font-family: 'Clash Display', sans-serif;
 }
 
 .button::before {
@@ -112,4 +113,13 @@ li{
 body{
     background-image: url('stars.jpg');
     background-repeat: repeat-y;
+}
+
+.form-group{
+    font-family: 'Clash Display', sans-serif;
+    color:#01a7aa;
+}
+
+.plots{
+    border-radius: 10px;
 }
